@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block bodyblock %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <br><br>
+           <!-- form upload -->
+           <h3 class="display-8">Gender Classification</h3>
+           <p> Upload an image (.jpg, .jpeg, .png), our model will detect face first and then predict gender based on face(Male or Female) </p>
+           <form action="#" method="POST" enctype="multipart/form-data" >
+            <div class="input-group">
+                <input type="file" class="form-control" name="image_name" required>
+                <button type="submit" value="Upload & Predict" class="btn btn-primary">Upload&Predict</button>
+
+            </div>
+           </form>
+        </div>
+    <div class="col-8">
+           <!-- report: predection --> 
+           <br><br>
+        {% if fileupload %}
+           <!-- predict image -->
+           <h3 class="display-8">Predicted Image</h3>
+           <img src="/static/upload/prediction_image.jpg" class="image-fluid" alt="" width="300">
+           
+           <!-- reporting -->
+           <hr>
+           <br>
+           <table class="table table-hover tabel-striped">
+            <tr>
+                <th>Detection Face</th>
+                <th>Eigen Image</th>
+                <th>Predection Gender</th>
+                <th>Score</th>
+            </tr>
+            {%for element in reprot%}
+               <tr>
+                <td>
+                    <img src="/static/predict/{{element[0]}}" class="image-fluid" height="100" alt="">
+                </td>
+                <td>
+                    <img src="/static/predict/{{element[1]}}" class="image-fluid" height="100" alt="">
+                </td>
+                <td>{{element[2]}}</td>
+                <td>{{element[3]}}</td>
+               </tr>
+
+            {%endfor%}
+
+           </table>
+        {%endif%}
+    </div>
+    </div>
+   
+</div>
+
+    {% endblock %}
